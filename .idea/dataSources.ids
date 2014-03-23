@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails pocket_inventory_signup: development" uuid="152d59aa-89a1-4336-bd9f-b40a6a0da4e7">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails pocket_inventory_signup: test" uuid="73ef891e-ce13-4eef-bc42-cca61c3e4773">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails pocket_inventory_signup: production" uuid="ae35e781-2b5a-46f3-adcf-28951c1e545e">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>
