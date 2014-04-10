@@ -1,4 +1,6 @@
 PocketInventorySignup::Application.routes.draw do
+  get 'visitors/index'
+  get 'visitors/create'
   post 'visitors/signup'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

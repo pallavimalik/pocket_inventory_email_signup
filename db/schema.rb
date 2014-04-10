@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20140323094022) do
     t.datetime "page_visited_flag_time"
     t.integer  "signup_flag"
     t.datetime "signup_flag_time"
-    t.integer  "no_of_page_visits"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -9,7 +9,6 @@ class CreateVisitors < ActiveRecord::Migration
       t.datetime :page_visited_flag_time
       t.integer :signup_flag
       t.datetime :signup_flag_time
-      t.integer :no_of_page_visits
 
       t.timestamps
     end
