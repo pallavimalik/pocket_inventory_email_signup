@@ -4,10 +4,10 @@ class VisitorsController < ApplicationController
   def signup
     visitor = Visitor.find_by_email_id(params[:email_id])
     if visitor.present?
-      visitor.signup_flag += 1
+      visitor.no_of_visits += 1
       visitor.save
     else
-      Visitor.create(email_id: params[:email_id], signup_flag_time: Time.now, signup_flag: 1)
+      Visitor.create(email_id: params[:email_id], signup_flag_time: Time.now, signup_flag: true, no_of_visits: 1)
     end
     redirect_url = 'http://localhost:8000/thankyou.html' if Rails.env == 'development'
     redirect_to redirect_url
@@ -21,10 +21,10 @@ class VisitorsController < ApplicationController
   def create
     visitor = Visitor.find_by_email_id(params[:email_id])
     if visitor.present?
-      visitor.page_visited_flag = visitor.page_visited_flag + 1
+      visitor.no_of_visits += 1
       visitor.save
     else
-      Visitor.create(email_id: params[:email_id], page_visited_flag: 1, page_visited_flag_time: Time.now)
+      Visitor.create(email_id: params[:email_id], page_visited_flag: true, page_visited_flag_time: Time.now, no_of_visits: 1)
     end
     render js: ''
   end
