@@ -28,4 +28,12 @@ class VisitorsController < ApplicationController
     end
     render js: ''
   end
+
+  def signup_analysis
+    @total_sign_up = Visitor.where(signup_flag: true).count
+    @total_visit_count = Visitor.where(page_visited_flag: true).count
+    @total_users = Visitor.count
+    @percentage_of_sign_ups = (@total_sign_up.to_f / @total_users) * 100
+    @percentage_of_visitors = (@total_visit_count.to_f / @total_users) * 100
+  end
 end
