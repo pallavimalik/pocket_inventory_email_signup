@@ -8,3 +8,13 @@ development:
  database: pocket_inventory_dev
  username: pocket_inventory_dev
  password: pocket_inventory_dev
+
+
+production:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: quotation
+  pool: 5
+  username: ips
+  password: password
