@@ -31,6 +31,9 @@ class VisitorsController < ApplicationController
     end
     visitor.page_visited_flag = true
     visitor.page_visited_flag_time= Time.now
+    unless(visitor.no_of_visits)
+      visitor.no_of_visits = 0
+    end
     visitor.no_of_visits += 1
     visitor.ip_address = request.remote_ip
     visitor.save
@@ -51,7 +54,7 @@ class VisitorsController < ApplicationController
   def multiple_post
     emails = params[:visitors].split(",")
     emails.each do |email|
-      Visitor.create(email_id: email, email_date: params[:date])
+      Visitor.create(email_id: email, email_date: params[:date], no_of_visits: 0)
     end
     render json: {visitors: Visitor.all}
   end
