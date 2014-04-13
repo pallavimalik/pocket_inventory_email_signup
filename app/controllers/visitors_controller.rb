@@ -4,11 +4,12 @@ class VisitorsController < ApplicationController
   def signup
     visitor = Visitor.find_by_email_id(params[:email_id])
     if visitor.present?
-      visitor.no_of_visits += 1
+      visitor.signup_flag = true
+      visitor.signup_flag_time= Time.now
+      visitor.entered_email = params[:entered_email]
       visitor.save
-    else
-      Visitor.create(email_id: params[:email_id], signup_flag_time: Time.now, signup_flag: true, no_of_visits: 1)
     end
+    redirect_url = 'http://pocket-inventory.com/thankyou.html'
     redirect_url = 'http://localhost:8000/thankyou.html' if Rails.env == 'development'
     redirect_to redirect_url
   end
@@ -19,14 +20,21 @@ class VisitorsController < ApplicationController
   end
 
   def create
-    visitor = Visitor.find_by_email_id(params[:email_id])
-    if visitor.present?
-      visitor.no_of_visits += 1
-      visitor.save
-    else
-      Visitor.create(email_id: params[:email_id], page_visited_flag: true, page_visited_flag_time: Time.now, no_of_visits: 1)
+    unless params[:email_id].present?
+      require 'securerandom'
+      params[:email_id] = SecureRandom.hex
     end
-    render js: ''
+
+    visitor = Visitor.find_by_email_id(params[:email_id])
+    unless visitor.present?
+      visitor = Visitor.new(no_of_visits: 0, email_id: params[:email_id])
+    end
+    visitor.page_visited_flag = true
+    visitor.page_visited_flag_time= Time.now
+    visitor.no_of_visits += 1
+    visitor.ip_address = request.remote_ip
+    visitor.save
+    render js: "setEmailID('#{params[:email_id]}');"
   end
 
   def signup_analysis
@@ -38,7 +46,6 @@ class VisitorsController < ApplicationController
   end
 
   def multiple
-
   end
 
   def multiple_post
