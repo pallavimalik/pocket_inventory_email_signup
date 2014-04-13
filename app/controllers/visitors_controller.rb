@@ -20,7 +20,7 @@ class VisitorsController < ApplicationController
   end
 
   def create
-    unless params[:email_id].present? || params[:email_id]=="undefined"
+    unless params[:email_id].present? || !params[:email_id]=="undefined"
       require 'securerandom'
       params[:email_id] = SecureRandom.hex
     end
