@@ -36,4 +36,23 @@ class VisitorsController < ApplicationController
     @percentage_of_sign_ups = (@total_sign_up.to_f / @total_users) * 100
     @percentage_of_visitors = (@total_visit_count.to_f / @total_users) * 100
   end
+
+  def multiple
+
+  end
+
+  def multiple_post
+    emails = params[:visitors].split(",")
+    emails.each do |email|
+      Visitor.create(email_id: email, email_date: params[:date])
+    end
+    render json: {visitors: Visitor.all}
+  end
+
+  def clear_db
+    Visitor.all.each do |v|
+      v.destroy
+    end
+    render json: {visitors: Visitor.all}
+  end
 end
