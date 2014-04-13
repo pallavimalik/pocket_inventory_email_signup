@@ -16,3 +16,7 @@
 /tmp
 
 config/database.yml
+
+# Ignore bundler config.
+/.bundle
+.idea
