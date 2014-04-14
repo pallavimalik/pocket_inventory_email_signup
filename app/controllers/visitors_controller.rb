@@ -20,7 +20,7 @@ class VisitorsController < ApplicationController
   end
 
   def create
-    unless params[:email_id].present? || !params[:email_id]=="undefined"
+    unless params[:email_id].present? || params[:email_id]!="undefined"
       require 'securerandom'
       params[:email_id] = SecureRandom.hex
     end
@@ -64,5 +64,15 @@ class VisitorsController < ApplicationController
       v.destroy
     end
     render json: {visitors: Visitor.all}
+  end
+
+  def pixel
+    visitor = Visitor.find_by_email_id(params[:email_id])
+    if visitor.present?
+      visitor.page_visited_flag = true
+      visitor.page_visited_flag_time= Time.now
+      visitor.save
+    end
+    send_data view_context.image_path('pixel.png'), :type => 'image/png',:disposition => 'inline'
   end
 end
